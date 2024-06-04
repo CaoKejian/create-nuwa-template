@@ -1,15 +1,25 @@
 {
   "name": "create-nuwa-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "bin": {
     "colin-add": "./bin/create-template.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "Cao Kejian",
+  "keywords": [
+    "React", "女娲", "tsx", "ui库"
+  ],
+  "homepage": "https://github.com/CaoKejian/NuWa",
+  "author": {
+    "name" : "CaoKejian",
+    "email" : "CaoKejian@foxmail.com",
+    "url" : "https://github.com/CaoKejian"
+  },
   "license": "ISC",
   "description": "创建nuwa（女娲）模版",
   "dependencies": {
