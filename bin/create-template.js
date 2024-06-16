@@ -79,22 +79,24 @@ function askComponentName() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Demo</title>
+  <title>Please input your component name.</title>
 </head>
 <body>
   <div id="app"></div>
 </body>
 </html>`,
-            'index.tsx': `import * as React from 'react'
-import * as ReactDOM from 'react-dom/client'
-import Upload from './component/upload'
-
+            'index.tsx': `import React from 'react'
+import { createRoot } from 'react-dom/client'
+            
 const NewDemo: React.FC = () => {
   return <Upload />
 }
 
-const root = ReactDOM.createRoot(document.getElementById('app')!)
-root.render(<NewDemo />)`,
+if(process.env.APP_NAME !== 'XLP') {
+  createRoot(document.getElementById('app')!).render(<NewDemo />)
+}
+            
+export { NewDemo }`,
             'meta.json': `{
   "desc": "这是一个组件",
   "img": "图片链接"
