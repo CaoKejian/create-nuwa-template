@@ -87,45 +87,44 @@ function askComponentName() {
 </body>
 </html>`,
       'index.tsx': `import React from 'react';
-      import * as s from './index.less'
-      import xprops from './model/props'
-      interface ButtonProps {
-        label?: string;
-        onClick?: () => void;
-      }
-      
-      const mergeProps = (xprops: ButtonProps, props: ButtonProps) => ({
-        ...xprops,
-        ...props,
-      })
-      export const Index = (props: ButtonProps) => {
-      
-        const mergedProps = mergeProps(xprops, props);
-        return (
-          <button
-            type="button"
-            className={s.button}
-            {...mergedProps}
-          >
-            {mergedProps.label || '默认文字'}
-          </button>
-        )
-      }
-      `,
-      'index.less': `{
-        .button {
-          color: white;
-          background-color: #1ea7fd;
-          width: 300px;
-          height: 60px;
-          line-height: 60px;
-          font-size: 16px;
-          border: none;
-          cursor: pointer;
-          font-weight: 700;
-          font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-      }`,
+import * as s from './index.less'
+import xprops from './model/props'
+interface ButtonProps {
+  label?: string;
+  onClick?: () => void;
+}
+
+const mergeProps = (xprops: ButtonProps, props: ButtonProps) => ({
+  ...xprops,
+  ...props,
+})
+export const Index = (props: ButtonProps) => {
+
+  const mergedProps = mergeProps(xprops, props);
+  return (
+    <button
+      type="button"
+      className={s.button}
+       {...mergedProps}
+    >
+      {mergedProps.label || '默认文字'}
+    </button>
+  )
+}
+`,
+      'index.less': `.button {
+  color: white;
+  background-color: #1ea7fd;
+  width: 300px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+`,
       'meta.json': `{
   "desc": "这是一个组件",
   "img": "图片链接"
@@ -133,9 +132,9 @@ function askComponentName() {
     };
 
     const propsContent = `export default {
-      label: 'ckj is king'
-    };`;
-    fs.writeFileSync(path.join(modelDirectory, 'props.js'), propsContent);
+  label: 'ckj is king'
+};`;
+    fs.writeFileSync(path.join(modelDirectory, 'props.ts'), propsContent);
 
     for (const [filename, content] of Object.entries(templates)) {
       fs.writeFileSync(path.join(directory, filename), content);
