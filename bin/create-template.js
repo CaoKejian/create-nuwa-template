@@ -65,6 +65,9 @@ function askComponentName() {
   readline.question('新创建组件的名字: ', (componentName) => {
     const directory = path.join(process.cwd(), componentName);
     const modelDirectory = path.join(directory, 'model');
+    const srcDirectory = path.join(process.cwd(), '../src');
+    const storyDirectory = path.join(srcDirectory, 'story');
+    const storyFilePath = path.join(storyDirectory, `${componentName}.story.ts`);
 
     if (fs.existsSync(directory)) {
       console.error('\x1b[1m\x1b[33m%s 组件已存在，请重新创建新的组件\x1b[0m', componentName);
@@ -86,12 +89,12 @@ function askComponentName() {
   <div id="app"></div>
 </body>
 </html>`,
-      'index.tsx': `import React from 'react';
+      'index.tsx': `import React from 'react'
 import * as s from './index.less'
 import xprops from './model/props'
 interface ButtonProps {
-  label?: string;
-  onClick?: () => void;
+  label?: string
+  onClick?: () => void
 }
 
 const mergeProps = (xprops: ButtonProps, props: ButtonProps) => ({
@@ -100,7 +103,7 @@ const mergeProps = (xprops: ButtonProps, props: ButtonProps) => ({
 })
 export const Index = (props: ButtonProps) => {
 
-  const mergedProps = mergeProps(xprops, props);
+  const mergedProps = mergeProps(xprops, props)
   return (
     <button
       type="button"
@@ -133,12 +136,37 @@ export const Index = (props: ButtonProps) => {
 
     const propsContent = `export default {
   label: 'ckj is king'
-};`;
+}`;
     fs.writeFileSync(path.join(modelDirectory, 'props.ts'), propsContent);
 
     for (const [filename, content] of Object.entries(templates)) {
       fs.writeFileSync(path.join(directory, filename), content);
     }
+
+    // 创建story文件
+    fs.writeFileSync(storyFilePath, `import type { Meta, StoryObj } from '@storybook/react'
+import { Demo } from '../../package/demo'
+import props from '../../package/demo/model/props'
+
+const meta = {
+  title: 'CaoKejian/组件名',
+  component: Demo,
+  parameters: {
+    layout: 'centered',
+    viewport: {
+      defaultViewport: 'iphonex',
+    },
+  },
+  tags: ['autodocs'],
+} satisfies Meta<typeof Demo>
+
+export default meta
+
+type Story = StoryObj<typeof meta>;
+
+export const DemoComponent: Story = {
+  args: props,
+}`)
     console.log('\x1b[1m\x1b[33mComponent %s created in %s\x1b[0m', componentName, directory);
     readline.close();
   });
