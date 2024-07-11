@@ -52,8 +52,6 @@ function verify() {
     process.exit(1);
   }
 }
-verify();
-main();
 
 // 提示用户输入组件名称的方法
 function askComponentName() {
@@ -171,3 +169,10 @@ export const DemoComponent: Story = {
     readline.close();
   });
 }
+
+module.exports = {
+  main,
+  verify
+};
+// verify();
+// main();
