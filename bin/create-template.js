@@ -76,17 +76,6 @@ function askComponentName() {
     fs.mkdirSync(directory, { recursive: true });
     fs.mkdirSync(modelDirectory, { recursive: true });
     const templates = {
-      'index.html': `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Please input your component name.</title>
-</head>
-<body>
-  <div id="app"></div>
-</body>
-</html>`,
       'index.tsx': `import React from 'react'
 import * as s from './index.less'
 import xprops from './model/props'
