@@ -26,6 +26,7 @@
   "license": "ISC",
   "description": "创建nuwa（女娲）模版",
   "dependencies": {
+    "clipboardy": "^4.0.0",
     "inquirer": "^9.2.23"
   }
 }

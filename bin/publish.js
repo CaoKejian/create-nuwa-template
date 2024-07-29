@@ -4,6 +4,7 @@ const { execSync } = require('child_process')
 const readline = require('readline')
 const fs = require('fs')
 const path = require('path')
+const clipboardy = require('clipboardy');
 
 // 定义 title 函数
 function title(message) {
