@@ -4,7 +4,6 @@ const { execSync } = require('child_process')
 const readline = require('readline')
 const fs = require('fs')
 const path = require('path')
-const clipboardy = require('clipboardy');
 
 // 定义 title 函数
 function title(message) {
@@ -35,7 +34,7 @@ function componentPublish() {
   })
 
   // 提示用户选择版本迭代类型
-  rl.question('选择大、中、小版本的迭代 (b/m/s): ', (choice) => {
+  rl.question('选择大、中、小版本的迭代 (b/m/s): ', async (choice) => {
     let versionType
 
     // 判断用户的选择
@@ -73,7 +72,8 @@ function componentPublish() {
       const updatedVersion = execSync(`npm show ${packageName} version`, { encoding: 'utf8' }).trim()
       const versionInfo = `${packageName}@${updatedVersion}`;
 
-      // 将版本信息复制到剪贴板
+      // 动态导入 clipboardy 并将版本信息复制到剪贴板
+      const clipboardy = await import('clipboardy');
       clipboardy.writeSync(versionInfo);
       console.log(`\x1b[1;32m组件更新成功, 版本信息已复制到剪贴板：${versionInfo}\x1b[0m`);
     } catch(err) {
