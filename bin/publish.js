@@ -73,11 +73,11 @@ function componentPublish() {
       const versionInfo = `${packageName}@${updatedVersion}`;
 
       // 动态导入 clipboardy 并将版本信息复制到剪贴板
-      const clipboardy = await import('clipboardy');
-      clipboardy.writeSync(versionInfo);
+      const { writeSync } = await import('clipboardy')
+      writeSync(versionInfo)
       console.log(`\x1b[1;32m组件更新成功, 版本信息已复制到剪贴板：${versionInfo}\x1b[0m`);
     } catch(err) {
-      console.error(`\x1b[1;31m组件更新失败:, ${err.message} \x1b[0m`);
+      console.error(`\x1b[1;31m组件更新失败: ${err.message} \x1b[0m`);
       process.exit(1);
     } finally {
       rl.close()
