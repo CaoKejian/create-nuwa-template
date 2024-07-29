@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-// 使用动态import导入inquirer模块
-const main = async () => {
-  let inquirer;
+const fs = require('fs')
+const path = require('path')
+
+const createTemplate = async () => {
+  verify() // 校验所处环境
+  let inquirer
   try {
     // 动态导入inquirer模块
-    const { default: prompt } = await import('inquirer');
-    inquirer = prompt;
+    const { default: prompt } = await import('inquirer')
+    inquirer = prompt
   } catch (err) {
-    console.error('无法加载inquirer模块:', err);
-    process.exit(1);
+    console.error('无法加载inquirer模块:', err)
+    process.exit(1)
   }
 
   const promptOptions = [
@@ -25,22 +25,22 @@ const main = async () => {
         '测试（误用）'
       ]
     }
-  ];
+  ]
 
   try {
     // 显示命令行选项
-    const answers = await inquirer.prompt(promptOptions);
+    const answers = await inquirer.prompt(promptOptions)
 
     if (answers.action === '创建nuwa（女娲）-React组件') {
-      askComponentName();
+      askComponentName()
     } else if (answers.action === '测试（误用）') {
-      console.log('执行测试操作...');
+      console.log('执行测试操作...')
       // 在这里添加测试操作的代码
     }
   } catch (error) {
-    console.error('发生错误:', error);
+    console.error('发生错误:', error)
   }
-};
+}
 
 function verify() {
   // 检查当前目录是否为项目根目录
@@ -58,23 +58,23 @@ function askComponentName() {
   const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
-  });
+  })
 
   readline.question('新创建组件的名字: ', (componentName) => {
-    const directory = path.join(process.cwd(), componentName);
-    const modelDirectory = path.join(directory, 'model');
-    const srcDirectory = path.join(process.cwd(), '../src');
-    const storyDirectory = path.join(srcDirectory, 'story');
-    const storyFilePath = path.join(storyDirectory, `${componentName}.story.ts`);
+    const directory = path.join(process.cwd(), componentName)
+    const modelDirectory = path.join(directory, 'model')
+    const srcDirectory = path.join(process.cwd(), '../src')
+    const storyDirectory = path.join(srcDirectory, 'story')
+    const storyFilePath = path.join(storyDirectory, `${componentName}.story.ts`)
 
     if (fs.existsSync(directory)) {
-      console.error('\x1b[1m\x1b[33m%s 组件已存在，请重新创建新的组件\x1b[0m', componentName);
-      readline.close();
-      return;
+      console.error('\x1b[1m\x1b[33m%s 组件已存在，请重新创建新的组件\x1b[0m', componentName)
+      readline.close()
+      return
     }
 
-    fs.mkdirSync(directory, { recursive: true });
-    fs.mkdirSync(modelDirectory, { recursive: true });
+    fs.mkdirSync(directory, { recursive: true })
+    fs.mkdirSync(modelDirectory, { recursive: true })
     const templates = {
       'index.tsx': `import React from 'react'
 import * as s from './index.less'
@@ -119,15 +119,15 @@ export const Index = (props: ButtonProps) => {
   "desc": "这是一个组件",
   "img": "图片链接"
 }`
-    };
+    }
 
     const propsContent = `export default {
   label: 'ckj is king'
-}`;
-    fs.writeFileSync(path.join(modelDirectory, 'props.ts'), propsContent);
+}`
+    fs.writeFileSync(path.join(modelDirectory, 'props.ts'), propsContent)
 
     for (const [filename, content] of Object.entries(templates)) {
-      fs.writeFileSync(path.join(directory, filename), content);
+      fs.writeFileSync(path.join(directory, filename), content)
     }
 
     // 创建story文件
@@ -149,19 +149,16 @@ const meta = {
 
 export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const DemoComponent: Story = {
   args: props,
 }`)
-    console.log('\x1b[1m\x1b[33mComponent %s created in %s\x1b[0m', componentName, directory);
-    readline.close();
-  });
+    console.log('\x1b[1m\x1b[33mComponent %s created in %s\x1b[0m', componentName, directory)
+    readline.close()
+  })
 }
 
 module.exports = {
-  main,
-  verify
-};
-// verify();
-// main();
+  createTemplate,
+}
