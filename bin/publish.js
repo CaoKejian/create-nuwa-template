@@ -97,5 +97,4 @@ function isGitWorkingDirectoryClean() {
   }
 }
 
-componentPublish()
 module.exports = { componentPublish }
