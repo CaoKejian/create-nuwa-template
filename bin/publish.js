@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const { execSync } = require('child_process')
-const readline = require('readline')
 const fs = require('fs')
 const path = require('path')
 
@@ -28,7 +27,7 @@ function componentPublish() {
   title(`更新 ${packageName} 版本`)
 
   // 创建 readline 接口
-  const rl = readline.createInterface({
+  const rl = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
   })
