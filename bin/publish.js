@@ -14,6 +14,7 @@ function title(message) {
 }
 
 function componentPublish() {
+  console.log('调用');
   // 读取 package.json 文件
   const packageJsonPath = path.resolve(process.cwd(), 'package.json')
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
@@ -31,6 +32,7 @@ function componentPublish() {
     input: process.stdin,
     output: process.stdout
   })
+  console.log('rl get');
 
   // 提示用户选择版本迭代类型
   rl.question('选择大、中、小版本的迭代 (b/m/s): ', async (choice) => {
