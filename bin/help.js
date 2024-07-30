@@ -1,6 +1,8 @@
 function helpDocs() {
   console.log(`
 Usage: colin <command> [options]
+Author: Cao Kejian
+Email: caokejian@foxmail.com
 
 Commands:
   colin publish  发布新版本
