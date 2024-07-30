@@ -61,14 +61,14 @@ function componentPublish() {
     }
 
     try {
-      // 更新版本
+      更新版本
       execSync(`npm version ${versionType}`, { stdio: 'inherit' })
 
       // 发布到本地 registry
       execSync('npm publish --registry http://localhost:4873/', { stdio: 'inherit' })
 
       // 获取更新后的版本
-      const updatedVersion = execSync(`npm show ${packageName} version`, { encoding: 'utf8' }).trim()
+      const updatedVersion = execSync(`npm show ${packageName} version --registry http://localhost:4873/`, { encoding: 'utf8' }).trim()
       const versionInfo = `${packageName}@${updatedVersion}`;
 
       // 动态导入 clipboardy 并将版本信息复制到剪贴板

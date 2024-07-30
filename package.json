@@ -27,6 +27,7 @@
   "description": "创建nuwa（女娲）模版",
   "dependencies": {
     "clipboardy": "^4.0.0",
+    "create-nuwa-template": "^1.0.12",
     "inquirer": "^9.2.23"
   }
 }
