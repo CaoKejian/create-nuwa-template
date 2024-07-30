@@ -20,7 +20,7 @@ function componentPublish() {
   const packageName = packageJson.name
 
   // 获取当前版本
-  const currentVersion = execSync(`npm show ${packageName} version`, { encoding: 'utf8' }).trim()
+  const currentVersion = execSync(`npm show ${packageName} version --registry http://localhost:4873/`, { encoding: 'utf8' }).trim()
   console.log(`\x1b[1;33m当前包版本：${packageName}@${currentVersion}\x1b[0m`);
 
   // 显示标题
