@@ -10,7 +10,7 @@ Commands:
   colin add      创建新的组件
 
 Options:
-  -h, help     显示帮助信息
+  -h, help       显示帮助信息
 
 Examples:
   colin publish  发布新版本并将版本信息复制到剪贴板

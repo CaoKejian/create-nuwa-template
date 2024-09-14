@@ -1,5 +1,5 @@
 {
-  "name": "create-nuwa-template",
+  "name": "@caokjian/colin-cli",
   "version": "1.2.3",
   "main": "index.js",
   "engines": {

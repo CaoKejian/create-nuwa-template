@@ -24,6 +24,10 @@ switch (args[0]) {
   case '-h':
     helpDocs();
     break;
+  case 'version': // 帮助文档
+  case '-v':
+    showVersion();
+    break;
   default:
     console.log('\x1b[1m\x1b[31m请输入 colin help 或者 colin -h 查看帮助文档\x1b[0m');
 }
